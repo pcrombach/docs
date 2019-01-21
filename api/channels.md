@@ -289,7 +289,7 @@ app.service('messages').publish((data, context) => {
 app.service('users').publish('created', (data, context) => {
   return [
     app.channel('admins'),
-    app.channel(app.channels).filter(connection =>
+    app.channel(app.channels).filter(connection => {
       connection.user._id === context.params.user._id
     )
   ];
@@ -355,7 +355,7 @@ const joinChannels = (user, connection) => {
 
 // Get a user to leave all channels
 const leaveChannels = user => {
-  app.channel(app.channels).leave(connection =>
+  app.channel(app.channels).leave(connection => {
     connection.user._id === user._id
   );
 };
